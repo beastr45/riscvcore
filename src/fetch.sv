@@ -5,14 +5,14 @@ module fetch (
     output logic imem_req,
     output logic [31:0] instruction,
     input logic [31:0] pc,
-    input logic rst_n,
+    input logic reset_n,
     input logic clk
 );
 
   logic req_reg;
 
-  always_ff @(posedge clk, negedge rst_n) begin
-    if (!rst_n) begin
+  always_ff @(posedge clk, negedge reset_n) begin
+    if (!reset_n) begin
       req_reg <= 1'b0;
     end else begin
       req_reg <= 1'b1;

@@ -32,7 +32,7 @@ module branch_control (
       endcase
     end
 
-    assign branch_taken = is_b_type & taken;
+    branch_taken = is_b_type & taken;
 
   end
 

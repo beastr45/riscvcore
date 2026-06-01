@@ -7,7 +7,7 @@ module instruction_memory #(
     output logic [31:0] imem_data
 );
 
-  logic [DATA_WIDH-1:0] mem[0:(2**ADDR_WIDTH)-1];
+  logic [DATA_WIDTH-1:0] mem[0:(2**ADDR_WIDTH)-1];
 
   initial begin
     $readmemh("machine_code.mem", mem);

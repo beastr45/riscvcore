@@ -16,10 +16,14 @@ TB_DIR = tb
 TOP_TB_FILE_NAME = test_bench.sv
 TOP_TB_FILE = $(TB_DIR)/$(TOP_TB_FILE_NAME)
 
+# Which mem file you are putting into memory
+MEM_FILE_NAME = find_maximum_in_array_machine_code.mem
+MEM_FILE = $(OUPUT_DIR)/machine_code.mem
+
 # Output file name for the compiled simulation (required by iverilog)
-OUTPUT_VV = $(OUPUT_DIR)/$(shell basename $(TOP_TB_FILE) .v).vvp
+OUTPUT_VV = $(OUPUT_DIR)/$(shell basename $(TOP_TB_FILE) .sv).vvp
 # Output file name for the Value Change Dump (VCD) waveform file
-OUTPUT_VCD = $(OUPUT_DIR)/$(shell basename $(TOP_TB_FILE) .v).vcd
+OUTPUT_VCD = $(OUPUT_DIR)/$(shell basename $(TOP_TB_FILE) .sv).vcd
 
 # --- Targets ---
 
@@ -27,10 +31,17 @@ OUTPUT_VCD = $(OUPUT_DIR)/$(shell basename $(TOP_TB_FILE) .v).vcd
 
 all: compile run view
 
+$(OUPUT_DIR):
+	mkdir $(OUPUT_DIR)
+
+$(MEM_FILE): $(OUPUT_DIR)
+	cp $(MEM_FILE_NAME) $@
+
 # Compile the Verilog source files
-compile: $(TOP_TB_FILE)
+compile: $(TOP_TB_FILE) $(MEM_FILE)
 	@echo "Compiling $(TOP_TB_FILE)..."
-	$(SIMULATOR) -g2012 -o $(OUTPUT_VV) -I$(MODULE_DIR) $(TOP_TB_FILE)
+	# $(SIMULATOR) -g2012 -o $(OUTPUT_VV) -I$(MODULE_DIR) $(TOP_TB_FILE)
+	$(SIMULATOR) -g2012 -o $(OUTPUT_VV) manifest.sv $(TOP_TB_FILE)
 
 # Run the compiled simulation
 run: $(OUTPUT_VV) compile

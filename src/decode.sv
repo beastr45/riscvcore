@@ -34,16 +34,15 @@ module decode (
   assign rd_addr = instruction[11:7];
   assign funct3 = instruction[14:12];
   assign funct7 = instruction[31:25];
-  assign rs1_addr = instruction[];
-  assign rs2_addr = instruction[];
-  assign rd_addr = instruction[];
+  assign rs1_addr = instruction[19:15];
+  assign rs2_addr = instruction[24:20];
 
   assign imm_i_type = {{20{instruction[31]}}, instruction[31:20]};
   assign imm_s_type = {{21{instruction[31]}}, instruction[30:25], instruction[11:7]};
   assign imm_b_type = {
     {20{instruction[31]}}, instruction[7], instruction[30:25], instruction[11:8], 1'b0
   };
-  assign imm_u_type = {[31 : 12], 12'b0};
+  assign imm_u_type = {instruction[31 : 12], 12'b0};
   assign imm_j_type = {
     {12{instruction[31]}}, instruction[19:12], instruction[20], instruction[30:21], 1'b0
   };
@@ -64,7 +63,7 @@ module decode (
       OPCODE_S_TYPE: s_type = 1'b1;
       OPCODE_B_TYPE: b_type = 1'b1;
       OPCODE_LUI,
-      OPCODE_AIUPC : u_type = 1'b1;
+      OPCODE_AUIPC : u_type = 1'b1;
       OPCODE_JAL   : j_type = 1'b1;
     endcase
   end

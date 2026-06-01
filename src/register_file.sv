@@ -12,9 +12,8 @@ module register_file (
     output logic [31:0] rs2_data,
 
     input logic clk,
-    input logic reset_n,
+    input logic reset_n
 
-    input logic rf_wr_en
 );
 
   logic [31:0] regs[0:31];
@@ -31,6 +30,6 @@ module register_file (
   end
 
   assign rs1_data = regs[rs1_addr];
-  assign rs1_data = regs[rs2_addr];
+  assign rs2_data = regs[rs2_addr];
 
 endmodule

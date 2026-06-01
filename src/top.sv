@@ -36,13 +36,12 @@ module top #(
   alu_op_t alu_op;
 
   logic [31:0] immediate;
-  logic [31:0] dmem_rd_data;
 
   logic rf_wr_en;
   logic [4:0] rs1_addr, rs2_addr, rd_addr;
   logic [31:0] rs1_data, rs2_data, wr_data;
   logic op1_sel, op2_sel;
-  wb_srt_t rf_wr_data_sel;
+  wb_src_t rf_wr_data_sel;
 
   logic j_type, u_type, b_type, s_type, i_type, r_type;
   logic [31:0] instruction;
@@ -93,7 +92,7 @@ module top #(
       .imem_req   (imem_req),
       .imem_addr  (imem_addr),
       .imem_data  (imem_data),
-      .instruction(instruction),
+      .instruction(instruction)
   );
 
   // +-----------------------------------------------------------+
@@ -193,10 +192,10 @@ module top #(
   assign alu_b = op2_sel ? immediate : rs2_data;
 
   alu u_alu (
-      .alu_a   (alu_a),
-      .alu_b   (alu_b),
-      .alu_op_t(alu_op),
-      .alu_res (alu_res)
+      .alu_a  (alu_a),
+      .alu_b  (alu_b),
+      .alu_op (alu_op),
+      .alu_res(alu_res)
   );
 
   // +-----------------------------------------------------------+

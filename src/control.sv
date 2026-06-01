@@ -88,7 +88,7 @@ module control (
       I_ORI:       ctrl_i.alu_op = OR;
       I_ANDI:      ctrl_i.alu_op = AND;
       I_SLLI:      ctrl_i.alu_op = SLL;
-      I_SRLI_SRAI: ctrl_i.alu_op = funct7_bit5 ? SRA : SRL;
+      I_SRLI_SRAI: ctrl_i.alu_op = alu_op_t'(funct7_bit5 ? SRA : SRL);
     endcase
 
     //JALR

@@ -11,7 +11,7 @@ package risc_pkg;
     OPCODE_S_TYPE = 7'h23,
     OPCODE_B_TYPE = 7'h63,
     OPCODE_LUI    = 7'h37,
-    OPCODE_AIUPC  = 7'h17,
+    OPCODE_AUIPC  = 7'h17,
     OPCODE_JAL    = 7'h6F
   } opcode_t;
 
@@ -65,7 +65,7 @@ package risc_pkg;
     R_SRA  = 4'h5,
     R_OR   = 4'hD,
     R_AND  = 4'h7
-  } b_type_instr_t;
+  } r_type_instr_t;
 
   // +-----------------------------------------------------------+
   // |          I-Type Instructions (Opcode[4], Funct3)          |

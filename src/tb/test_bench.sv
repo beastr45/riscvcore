@@ -1,4 +1,3 @@
-`include "top.sv"  //Iverilog directive
 `timescale 1ns / 1ps
 
 module test_bench ();
@@ -27,6 +26,8 @@ module test_bench ();
 
   // Testbench initialization
   initial begin
+    $dumpfile("test_bench.vcd");
+    $dumpvars(0, test_bench);// send to gtkwave for analysis
     // Initialize signals
     clk     = 0;  // Start clock at 0
     reset_n = 0;  // Active-low reset initially asserted
