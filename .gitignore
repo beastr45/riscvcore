@@ -1,0 +1,9 @@
+# Vivado Project Generated Output Directories
+*.cache/
+*.hw/
+*.ip_user_files/
+*.sim/
+
+# Local Third-Party Tool/Build Artifacts
+src/icarusBuild/
+temp.txt
